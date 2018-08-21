@@ -1,0 +1,25 @@
+<nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/">
+                <span class="glyphicon glyphicon-home"></span> {{vm.page_name}}
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+            <ul class="nav navbar-nav">
+                <li ng-class="vm.isActive('/about')"><a ng-href="#!/">About</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right navbar-right-text">
+                <!-- if authenticated render payments and logout -->
+                <li data-ng-hide="vm.hasToken()" ng-class="vm.isActive('/login')"><a href="#!/login">Login</a></li>
+                <li data-ng-hide="vm.hasToken()" ng-class="vm.isActive('/register')"><a href="#!/register">Register</a></li>
+
+                <li data-ng-show="vm.hasToken()">Welcome back UserName</li>
+                <li data-ng-show="vm.hasToken()" ng-class="vm.isActive('/payments')"><a href="#!/payments">My Payments</a></li>
+                <li data-ng-show="vm.hasToken()"><a href="#!/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

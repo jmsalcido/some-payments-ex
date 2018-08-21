@@ -2,7 +2,7 @@
 <html ng-app="frontend">
   <head>
     <meta charset="utf-8">
-    <title>frontend</title>
+    <title>Payments</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -24,32 +24,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <nav class="navbar navbar-static-top navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#!/">
-            <span class="glyphicon glyphicon-home"></span> Foo Payments
-          </a>
-        </div>
-    
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-          <ul class="nav navbar-nav">
-            <li class="active"><a ng-href="#!/">Home</a></li>
-            <li><a ng-href="#!/">About</a></li>
-          </ul>
-    
-          <ul class="nav navbar-nav navbar-right navbar-right-text">
-            <!-- if authenticated render payments and logout -->
-            <li><a href="#!/login">Login</a></li>
-            <li><a href="#!/register">Register</a></li>
-
-            <li>Welcome back UserName</li>
-            <li><a href="#!/payments">My Payments</a></li>
-            <li><a href="#!/logout">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <app-nav-bar></app-nav-bar>
     
     <div ng-view class="container"></div>
 
