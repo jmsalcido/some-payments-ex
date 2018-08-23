@@ -7,6 +7,10 @@ class Message
     'Invalid credentials'
   end
 
+  def self.invalid_file_type(file_type)
+    "Invalid file type, please send a file of type: #{file_type}"
+  end
+
   def self.invalid_token
     'Invalid token'
   end

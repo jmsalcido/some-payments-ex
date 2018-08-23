@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  require 'mimemagic'
 
   before_action :set_payment, only: [:show, :update, :destroy]
 
@@ -17,6 +18,15 @@ class PaymentsController < ApplicationController
   def create
     @payment = @current_user.payments.create!(payment_params)
     json_response @payment, :created
+  end
+
+  # POST /payments/import
+  def import
+    file = params[:file]
+    validate_file_type file
+
+    response = Payment.csv(file, @current_user.id)
+    json_response response, :created
   end
 
   # PUT /payments/:id
@@ -41,6 +51,15 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:id])
     if @payment.created_by_id != @current_user.id
       raise ExceptionHandler::AuthenticationError, Message.invalid_credentials
+    end
+  end
+
+  def validate_file_type(file)
+    expected_type = 'text/csv'
+    mime_file = MimeMagic.by_magic(File.open(file.tempfile))
+
+    if !mime_file.nil? && mime_file.type != expected_type
+      raise ExceptionHandler::FileNotValid, Message.invalid_file_type(expected_type)
     end
   end
 
