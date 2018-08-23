@@ -6,16 +6,21 @@
     .controller("PaymentsController", PaymentsController);
 
   /** @ngInject */
-  function PaymentsController(PaymentService) {
+  function PaymentsController(PaymentService, authenticator, $location) {
     var vm = this;
 
     vm.sortField = 'concept';
     vm.sortReverse = false;
     vm.orderBy = orderBy;
 
-    activate();
+    initialize();
 
-    function activate() {
+    function initialize() {
+      if (!authenticator.hasToken()) {
+        $location.path('/login');
+        return;
+      }
+
       PaymentService.getPayments(function(data) {
         vm.payments = data;
       });
