@@ -6,7 +6,7 @@
     .controller("NavigationController", NavigationController);
 
   /** @ngInject */
-  function NavigationController($scope, $location, jwt) {
+  function NavigationController($scope, $location, authenticator) {
     var vm = this;
 
     vm.hasToken = hasToken;
@@ -14,7 +14,7 @@
     vm.page_name = "Some Payments";
 
     function hasToken() {
-      return jwt.getToken() === null;
+      return authenticator.hasToken();
     }
 
     function isActive(path) {

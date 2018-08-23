@@ -3,8 +3,8 @@
 
     <div>
         <p>
-            <span>sorting by: {{payments.sortField}}</span> |
-            <span>reversed: {{payments.sortReverse}}</span>
+            <span>sorting by: {{vm.sortField}}</span> |
+            <span>reversed: {{vm.sortReverse}}</span>
         </p>
     </div>
 
@@ -13,14 +13,14 @@
         <thead>
             <tr>
                 <td>
-                    <a href="" ng-click="payments.orderBy('concept')">Concept
-                        <i ng-show="payments.sortField == 'concept' && !payments.sortReverse" class="fas fa-caret-down"></i>
-                        <i ng-show="payments.sortField == 'concept' && payments.sortReverse" class="fas fa-caret-up"></i>
+                    <a href="" ng-click="vm.orderBy('concept')">Concept
+                        <i ng-show="vm.sortField == 'concept' && !vm.sortReverse" class="fas fa-caret-down"></i>
+                        <i ng-show="vm.sortField == 'concept' && vm.sortReverse" class="fas fa-caret-up"></i>
                 </td>
                 <td>
-                    <a href="" ng-click="payments.orderBy('quantity')">Quantity
-                        <span ng-show="payments.sortField == 'quantity' && !payments.sortReverse" class="fas fa-caret-down"></span>
-                        <span ng-show="payments.sortField == 'quantity' && payments.sortReverse" class="fas fa-caret-up"></span>
+                    <a href="" ng-click="vm.orderBy('quantity')">Quantity
+                        <span ng-show="vm.sortField == 'quantity' && !vm.sortReverse" class="fas fa-caret-down"></span>
+                        <span ng-show="vm.sortField == 'quantity' && vm.sortReverse" class="fas fa-caret-up"></span>
                 </td>
                 <td>
                     Date
@@ -29,7 +29,7 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat="payment in payments.payments | orderBy:payments.sortField:payments.sortReverse">
+            <tr ng-repeat="payment in vm.payments | orderBy:vm.sortField:vm.sortReverse">
                 <td>{{ payment.concept }}</td>
                 <td>{{ payment.quantity }}</td>
                 <td>{{ payment.date }}</td>
