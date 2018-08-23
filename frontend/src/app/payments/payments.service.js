@@ -10,7 +10,8 @@
         getPayment: getPayment,
         addPayment: addPayment,
         deletePayment: deletePayment,
-        editPayment: editPayment
+        editPayment: editPayment,
+        importCsv: importCsv
       };
   
       return service;
@@ -36,7 +37,6 @@
         .then(function(response) {
           callback(true, response.data);
         }, function(errorResponse) {
-          console.log(errorResponse);
           callback(false, errorResponse.data);
         })
       }
@@ -57,6 +57,24 @@
         }, function(errorResponse) {
           callback(false, errorResponse.data);
         })
+      }
+
+      function importCsv(file, callback) {
+        var formData = new FormData();
+        formData.append("file", file);
+
+        var request = {
+          method: 'POST',
+          url: API + '/payments/import',
+          data: formData,
+          headers: {'Content-Type': undefined }
+        }
+
+        $http(request).then(function(response) {
+          callback(true, response.data);
+        }, function(response) {
+          callback(false, response.data);
+        });
       }
 
     }

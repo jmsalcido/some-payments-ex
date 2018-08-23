@@ -3,10 +3,10 @@
 
   angular
     .module("frontend")
-    .controller("DeletePaymentModalController", DeletePaymentModalController);
+    .controller("SimplePaymentModalController", SimplePaymentModalController);
 
   /** @ngInject */
-  function DeletePaymentModalController($uibModalInstance) {
+  function SimplePaymentModalController($uibModalInstance) {
     var vm = this;
 
     vm.okModal = function() {

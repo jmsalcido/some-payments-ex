@@ -6,7 +6,13 @@
     .controller("PaymentsController", PaymentsController);
 
   /** @ngInject */
-  function PaymentsController(PaymentService, $location, $uibModal, $document, $log) {
+  function PaymentsController(
+    PaymentService,
+    $location,
+    $uibModal,
+    $document,
+    $log
+  ) {
     var vm = this;
 
     vm.sortField = "id";
@@ -15,6 +21,7 @@
     vm.addPayment = addPayment;
     vm.editPayment = editPayment;
     vm.deletePayment = deletePayment;
+    vm.importCsv = importCsv;
 
     initialize();
 
@@ -52,7 +59,7 @@
       var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: "app/payments/delete.modal.html",
-        controller: "DeletePaymentModalController",
+        controller: "SimplePaymentModalController",
         controllerAs: "vm",
         appendTo: parentElement
       });
@@ -66,6 +73,23 @@
           }
         });
       });
+    }
+
+    function importCsv() {
+      var parentElement = angular.element($document[0].querySelector("body"));
+
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: "app/payments/import.modal.html",
+        controller: "ImportPaymentModalController",
+        controllerAs: "vm",
+        appendTo: parentElement
+      });
+
+      modalInstance.result.then(function() {
+        getPayments();
+      });
+
     }
   }
 })();
