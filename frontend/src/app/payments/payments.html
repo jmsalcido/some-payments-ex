@@ -13,6 +13,11 @@
         <thead>
             <tr>
                 <td>
+                    <a href="" ng-click="vm.orderBy('id')">ID
+                        <i ng-show="vm.sortField == 'id' && !vm.sortReverse" class="fas fa-caret-down"></i>
+                        <i ng-show="vm.sortField == 'id' && vm.sortReverse" class="fas fa-caret-up"></i>
+                </td>
+                <td>
                     <a href="" ng-click="vm.orderBy('concept')">Concept
                         <i ng-show="vm.sortField == 'concept' && !vm.sortReverse" class="fas fa-caret-down"></i>
                         <i ng-show="vm.sortField == 'concept' && vm.sortReverse" class="fas fa-caret-up"></i>
@@ -23,19 +28,29 @@
                         <span ng-show="vm.sortField == 'quantity' && vm.sortReverse" class="fas fa-caret-up"></span>
                 </td>
                 <td>
-                    Date
+                    <a href="" ng-click="vm.orderBy('date')">Date
+                        <span ng-show="vm.sortField == 'date' && !vm.sortReverse" class="fas fa-caret-down"></span>
+                        <span ng-show="vm.sortField == 'date' && vm.sortReverse" class="fas fa-caret-up"></span>
                 </td>
+                <td>Actions</td>
             </tr>
         </thead>
 
         <tbody>
             <tr ng-repeat="payment in vm.payments | orderBy:vm.sortField:vm.sortReverse">
+                <td>{{ payment.id }}</td>
                 <td>{{ payment.concept }}</td>
                 <td>{{ payment.quantity }}</td>
                 <td>{{ payment.date }}</td>
+                <td>
+                    <a href="" ng-click="vm.editPayment(payment.id)"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="" ng-click="vm.deletePayment(payment.id)"><i class="fas fa-trash-alt"></i></a>
+                </td>
             </tr>
         </tbody>
 
     </table>
+
+    <button class="btn btn-primary" ng-click="vm.addPayment()"><i class="fas fa-plus"></i> New Payment</i></button>
 
 </div>

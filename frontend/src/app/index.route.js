@@ -30,11 +30,41 @@
       .when('/payments', {
         templateUrl: 'app/payments/payments.html',
         controller: 'PaymentsController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          authenticated: onlyAuthenticatedUsers
+        }
+      }).when('/payments/add', {
+        templateUrl: 'app/payments/add.html',
+        controller: 'ModifyPaymentController',
+        controllerAs: 'vm',
+        resolve: {
+          authenticated: onlyAuthenticatedUsers
+        }
+      }).when('/payments/edit/:id', {
+        templateUrl: 'app/payments/edit.html',
+        controller: 'ModifyPaymentController',
+        controllerAs: 'vm',
+        resolve: {
+          authenticated: onlyAuthenticatedUsers
+        }
       })
       .otherwise({
         redirectTo: '/'
       });
-  }
 
+      function onlyAuthenticatedUsers($location, $q, authenticator) {
+        var defer = $q.defer();
+        if (!authenticator.hasToken()){
+          // User isn’t authenticated
+          defer.reject();
+          $location.path('/login');
+        } else {
+          defer.resolve();
+        }
+
+        return defer.promise;
+      }
+
+  }
 })();
