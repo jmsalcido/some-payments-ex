@@ -12,9 +12,19 @@
     vm.hasToken = hasToken;
     vm.isActive = isActive;
     vm.page_name = "Some Payments";
+    vm.username = getUsername();
 
     function hasToken() {
       return authenticator.hasToken();
+    }
+
+    function getUsername() {
+      var username = "user";
+      if (hasToken()) {
+        username = authenticator.tokenInfo().username;
+      }
+
+      return username;
     }
 
     function isActive(path) {

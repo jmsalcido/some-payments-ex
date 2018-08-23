@@ -6,7 +6,7 @@
     .controller("PaymentsController", PaymentsController);
 
   /** @ngInject */
-  function PaymentsController() {
+  function PaymentsController(PaymentService) {
     var vm = this;
 
     vm.sortField = 'concept';
@@ -16,25 +16,9 @@
     activate();
 
     function activate() {
-      var payments = [
-        {
-          concept: "Hola soy un pago",
-          quantity: 100,
-          date: new Date()
-        },
-        {
-          concept: "Hola soy otro pago",
-          quantity: 2,
-          date: new Date()
-        },
-        {
-          concept: "Abracadabra pago de cabra",
-          quantity: 5,
-          date: new Date()
-        }
-      ];
-
-      vm.payments = payments;
+      PaymentService.getPayments(function(data) {
+        vm.payments = data;
+      });
     }
 
     function orderBy(field) {

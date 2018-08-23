@@ -16,7 +16,7 @@
                 <li data-ng-hide="vm.hasToken()" ng-class="vm.isActive('/login')"><a href="#!/login">Login</a></li>
                 <li data-ng-hide="vm.hasToken()" ng-class="vm.isActive('/register')"><a href="#!/register">Register</a></li>
 
-                <li data-ng-show="vm.hasToken()">Welcome back UserName</li>
+                <li data-ng-show="vm.hasToken()">Welcome back {{vm.username}}</li>
                 <li data-ng-show="vm.hasToken()" ng-class="vm.isActive('/payments')"><a href="#!/payments">My Payments</a></li>
                 <li data-ng-show="vm.hasToken()"><a href="#!/logout">Logout</a></li>
             </ul>

@@ -1,7 +1,7 @@
 (function() {
   "use strict";
 
-  angular.module("frontend").factory("authenticator", authenticator);
+  angular.module("frontend").service("authenticator", authenticator);
 
   /** @ngInject */
   function authenticator($http, jwt, API) {
@@ -11,7 +11,8 @@
       login: login,
       register: register,
       logout: logout,
-      hasToken: hasToken
+      hasToken: hasToken,
+      tokenInfo: tokenInfo
     };
 
     return service;
@@ -47,7 +48,7 @@
     function authenticate(promise, callback) {
       return promise.then(
         function(response) {
-          callback(parseToken(response), response.data);
+          callback(storeToken(response), response.data);
         },
         function(response) {
           callback(false, response.data);
@@ -55,7 +56,7 @@
       );
     }
 
-    function parseToken(response) {
+    function storeToken(response) {
       var token = response.data.auth_token;
       var success = false;
       if (token) {
@@ -73,5 +74,10 @@
     function logout() {
       jwt.deleteToken();
     }
+
+    function tokenInfo() {
+      return jwt.parseToken(jwt.getToken());
+    }
+
   }
 })();
