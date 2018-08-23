@@ -1,24 +1,9 @@
-# README
+# How to run
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application is going to use port `8080`, right now the API CORS filter supports any request from any host
 
-Things you may want to cover:
+1. run: `docker-compose build`
+2. run: `docker-compose run api rails db:migrate`
+3. run: `docker-compose up`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+API should be running on port 8080 accepting requests from `localhost` only.
